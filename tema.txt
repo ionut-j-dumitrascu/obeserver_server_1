@@ -1,0 +1,23 @@
+ agenda. cand modif numar -> notificare
+ mesaje - pt fiecare numar -> schimbam nr -> notificare -> verificam print messages(nr nou)
+
+ Se da un server de mesaje care stocheaza mesaje pentru numere de telefon inregistrate. 
+ Serverul expune urmatoarele informatii:
+-	Inregistrare numar de telefon
+-	Stocare mesaj nou pentru un numar de telefon. Daca nu exista un numar de telefon inregistrat, atunci mesajul se ignora
+-	Deinregistrare numar de telefon, care implica stergerea tuturor mesajelor associate lui
+-	Schimbarea numar de telefon, unde toate mesajele se vor gasi sub numele nou de telefon
+-	obtinerea mesajelor pentru un numar de telefon
+
+Se dau niste clienti care vor folosi functionalitatile expuse de server
+(unde se vor stoca mesajele) prin intermediu numarului sau de telefon.
+Cand un mesaj este trimis catre un client, 
+atunci clientul destinatar o sa fie informat de serverul de mesaje. 
+Toate operatiile care se realizeaza pe serverul de mesaje 
+trebuie inregistrare la consola.
+
+
+
+class Subscriber {notify(), }
+class Telefon : public Subscriber {nr_tel, messages[], notify)(), }
+
