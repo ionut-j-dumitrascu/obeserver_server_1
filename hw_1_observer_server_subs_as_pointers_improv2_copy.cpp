@@ -75,9 +75,9 @@ class Station : public IOstation{
                 std::cout<<"\n !!! Entry found !!! Nr ."<<device_in->my_number()<<" already registered";
             }
             else if(result == subs_msgs_map.end()){     // entry not found -> add number
-                std::cout<<"\n !!! Entry "<<device_in->my_number()<<" not found !!! Nr. "<<device_in->my_number()<<" will be registered";
+                std::cout<<"\n !!! Entry "<<device_in->my_number()<<" not found !!! Nr. "<<device_in->my_number()<<" will be registered ";
                 subs_msgs_map[device_in] = std::vector<std::string>{};
-                std::cout<<device_in->my_number();
+                //std::cout<<device_in->my_number();
             }
         }
 
@@ -90,9 +90,12 @@ class Station : public IOstation{
                 if((iter_next->first)->my_number()==nr){
                     std::cout<<"\n Sub "<<(iter_next->first)->my_number()<<" will be deleted";
                     subs_msgs_map.erase(iter_next);
-                    std::cout<<"\n Remaining subs: ";
-                    all_subs();
+                    break;
                 }
+
+            std::cout<<"\n Remaining subs: ";
+            all_subs();
+
         }
 
 
@@ -121,7 +124,7 @@ class Station : public IOstation{
                 }
             }
             else{
-               std::cout<<"Number not found / removed"; 
+               std::cout<<"\n Number "<<device_->my_number()<<" not found / removed"; 
             }
         }
 
