@@ -83,15 +83,20 @@ class Station : public IOstation{
 
         void remove_IOdevice(int nr){
             std::map<IOdevice *, std::vector<std::string>>::iterator subs_iterator;
-
+            
+            subs_iterator = subs_msgs_map.begin();
             auto iter_next = subs_iterator;
-
-            for(iter_next=subs_msgs_map.begin(); iter_next!=subs_msgs_map.end(); iter_next++)
-                if((iter_next->first)->my_number()==nr){
+            
+            while(iter_next != subs_msgs_map.end()){
+                ++iter_next;
+                if((iter_next->first)->my_number()==nr && iter_next!=subs_msgs_map.end()){
                     std::cout<<"\n Sub "<<(iter_next->first)->my_number()<<" will be deleted";
                     subs_msgs_map.erase(iter_next);
                     break;
                 }
+                subs_iterator = iter_next;
+
+            }
 
             std::cout<<"\n Remaining subs: ";
             all_subs();
