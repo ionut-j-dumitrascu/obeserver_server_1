@@ -83,16 +83,24 @@ class Station : public IOstation{
 
         void remove_IOdevice(int nr){
             std::map<IOdevice *, std::vector<std::string>>::iterator subs_iterator;
-
-            for(subs_iterator=subs_msgs_map.begin(); subs_iterator!=subs_msgs_map.end(); subs_iterator++)
-                if((subs_iterator->first)->my_number()==nr){
-                    std::cout<<"\n Sub "<<(subs_iterator->first)->my_number()<<" will be deleted";
-                    subs_msgs_map.erase(subs_iterator);
-                    std::cout<<"\n Remaining subs: ";
-                    all_subs();
-
+            
+            subs_iterator = subs_msgs_map.begin();
+            auto iter_next = subs_iterator;
+            
+            while(iter_next != subs_msgs_map.end()){
+                ++iter_next;
+                if((iter_next->first)->my_number()==nr && iter_next!=subs_msgs_map.end()){
+                    std::cout<<"\n Sub "<<(iter_next->first)->my_number()<<" will be deleted";
+                    subs_msgs_map.erase(iter_next);
+                    break;
+                }
+                subs_iterator = iter_next;
 
             }
+
+            std::cout<<"\n Remaining subs: ";
+            all_subs();
+
         }
 
         void retrieve_all_messages(IOdevice *device_){
@@ -106,7 +114,7 @@ class Station : public IOstation{
                 }
             }
             else{
-               std::cout<<"Number not found / removed"; 
+               std::cout<<"\n Number not found / removed"; 
             }
         }
 
