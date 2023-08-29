@@ -82,20 +82,22 @@ class Station : public IOstation{
         }
 
         void remove_IOdevice(int nr){
+            // iter_next used to increment subs_iterator
+            // iter_next only in loop
+            // to remove : iter_next outside loop 
             std::map<IOdevice *, std::vector<std::string>>::iterator subs_iterator;
             
             subs_iterator = subs_msgs_map.begin();
-            auto iter_next = subs_iterator;
             
-            while(iter_next != subs_msgs_map.end()){
-                ++iter_next;
+            while(subs_iterator != subs_msgs_map.end()){
+                auto iter_next = subs_iterator;
                 if((iter_next->first)->my_number()==nr && iter_next!=subs_msgs_map.end()){
                     std::cout<<"\n Sub "<<(iter_next->first)->my_number()<<" will be deleted";
                     subs_msgs_map.erase(iter_next);
                     break;
                 }
-                subs_iterator = iter_next;
-
+                else
+                    subs_iterator++;
             }
 
             std::cout<<"\n Remaining subs: ";
@@ -192,6 +194,14 @@ void example_runs(){
     server_ex->retrieve_all_messages(subscriber5);
 
     subscriber3->send_message(222, "check message");
+
+    server_ex->remove_IOdevice(123);
+    server_ex->remove_IOdevice(456);
+    server_ex->remove_IOdevice(789);
+    server_ex->remove_IOdevice(456);
+    server_ex->remove_IOdevice(222);
+    server_ex->remove_IOdevice(222);
+    
 }
 
 int main(){
